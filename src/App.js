@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import{Route, Routes,Link, NavLink, useLoaderData} from "react-router-dom"
+import Home from './pages/Home';
+import About from './pages/About';
+import Stock from './pages/Stock';
+import Dashboard from './pages/Dashboard';
+import { priceLoader } from "./loaders"
 function App() {
   return (
+    <>
+    <nav>
+      <ul>
+        <li><NavLink to="/"><div>Home</div></NavLink></li>
+        <li><NavLink to="/about"><div>About</div></NavLink></li>
+        
+        <li><NavLink to="/stocks"><div>Stock</div></NavLink></li>
+      </ul>
+    </nav>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+      <Route path="/" element={<Home/>}/>
+     <Route path="/about" element={<About/>}/>
+     <Route path="/stocks" element={<Dashboard/>}/>
+     <Route path="/stocks/:symbol" element={<Stock/>} loader={priceLoader}/>
+     
+      </Routes>
+      
+     
     </div>
+    </>
   );
 }
 
